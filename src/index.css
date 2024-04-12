@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: 0 0 0;
+  }
+}
+:root {
+  --pokedex-g-one: 345 92 44;
+  --pokedex-g-two: 344 90 43;
+  --pokedex-g-three: 344 91 43;
+}
+@layer base {
+  :root {
+    --bg-color: 0 0 100;
+    --primary: 100 100 100;
+    --primary-foreground: 100 100 100;
+    --secondary: 100 100 100;
+    --secondary-foreground: 100 100 100;
+  }
+  body {
+    background-color: hsl(var(--bg-color));
+
+    min-width: 100vw;
+    min-height: 100vh;
+  }
+}
+
+.pokedex {
+  background: linear-gradient(
+    120deg,
+    hsl(var(--pokedex-g-one)) 20%,
+    hsl(var(--pokedex-g-two)) 40%,
+    hsl(var(--pokedex-g-three)) 70%
+  );
+  height: 500px;
+  width: 70rem;
+  margin: 25vh auto;
+
+  display: flex;
+  justify-content: space-between;
+
+  .left {
+    flex: 1 1 55%;
+    .inner {
+      height: 100%;
+
+      .top {
+        padding: 1rem;
+        display: flex;
+        .big-led {
+          background: white;
+          border-radius: 50%;
+          border: 2px solid black;
+          width: 5rem;
+          height: 5rem;
+          .inside {
+            background: hsl(183, 93%, 51%);
+            height: 80%;
+            width: 80%;
+            transform: translate(17%, 10%);
+            border-radius: 50%;
+            :is(.a-color, .b-color, .c-color) {
+              border-radius: 50%;
+            }
+            .a-color {
+              background: gray;
+              width: 80%;
+              height: 80%;
+              transform: translate(0%, 10%);
+            }
+            .b-color {
+              background: yellow;
+            }
+            .c-color {
+              background: green;
+            }
+          }
+        }
+      }
+      .led__wrapper {
+        width: 20%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .leds {
+        background: green;
+        border-radius: 100%;
+        box-shadow: 2px 2px 1px black;
+        width: 22px;
+        height: 22px;
+        &:nth-child(1) {
+          background: blue;
+        }
+        &:nth-child(2) {
+          background: gray;
+        }
+        &:nth-child(3) {
+          background: black;
+        }
+      }
+    }
+  }
+  .right {
+    flex: 1 1 45%;
+    .inner {
+      background: blue;
+      flex: none;
+      margin: 8% auto 2%;
+      height: 90%;
+    }
+  }
+}
