@@ -403,14 +403,33 @@
       .third {
         grid-area: right;
         .cross {
+          &:has(.active_up) {
+            background: #000;
+            .ver {
+            }
+            .hor {
+            }
+          }
+          &:has(.active_down) {
+          }
+          &:has(.active_left) {
+            .ver {
+            }
+            .hor {
+            }
+          }
+          &:has(.active_right) {
+            .ver {
+            }
+            .hor {
+            }
+          }
           display: grid;
           grid-template:
             "one one one" 50px
             "two two two" 50px
             "three three three" 50px
             / 50px 50px 50px;
-          & > div {
-          }
 
           .hor,
           .ver,
@@ -419,19 +438,31 @@
             border: 3px solid black;
             background: var(--dark-btn-c);
             position: relative;
+            .btn_color {
+              transition: all 0.2s ease-in-out;
+              flex: 1 0 50%;
+            }
           }
 
           .ver {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
             border-radius: 0.5rem;
             grid-area: 1/2/4/3;
             z-index: 11;
             &.active_up {
-              transform: scale(1.5);
-              background: teal;
+              transform: scale(0.9) translate(0px, -1px) skew(-5deg, -5deg);
+              .btn_color:nth-child(1) {
+                background: violet;
+              }
             }
             &.active_down {
-              transform: scale(1.5);
-              background: teal;
+              transform: scale(0.9) translate(0px, 1px) skew(5deg, 5deg);
+              .btn_color:nth-child(2) {
+                background: violet;
+              }
             }
           }
 
@@ -450,21 +481,53 @@
             background: hsl(0, 0%, 5%);
             height: 100%;
             width: 100%;
+            transition: all 0.2 0 linear;
+            .ver.active_up ~ & {
+              background: yellow;
+              transform: scale(0.9) translate(-1px, 0px) skew(-5deg, -5deg);
+            }
+
+            .ver.active_down ~ & {
+              background: yellow;
+              transform: scale(0.9) translate(-1px, 0px) skew(-5deg, -5deg);
+            }
           }
 
           .hor {
+            display: flex;
+            justify-content: center;
+
+            transition: all 0.2 0 linear;
             border-radius: 0.5rem;
             grid-area: two;
             z-index: 11;
             &.active_left {
-              background: teal;
+              transform: scale(0.9) translate(-1px, 0px) skew(-5deg, -5deg);
+
+              .btn_color:nth-child(1) {
+                background: violet;
+              }
             }
             &.active_right {
-              transform: scale(1.5);
-              background: teal;
+              transform: scale(0.9) translate(1px, 0px) skew(5deg, 5deg);
+
+              .btn_color:nth-child(2) {
+                background: violet;
+              }
             }
           }
+
           .hor_side {
+            transition: all 0.2 0 linear;
+            .hor.active_left ~ & {
+              background: yellow;
+              transform: scale(0.9) translate(-1px, 0px) skew(-5deg, -5deg);
+            }
+
+            .hor.active_right ~ & {
+              background: yellow;
+              transform: scale(0.9) translate(-1px, 0px) skew(-5deg, -5deg);
+            }
             grid-area: two;
             transform: translate(-3%, 15%);
             border-radius: 5px;
@@ -589,6 +652,15 @@
 
     width: 590px;
 
+    .wrap {
+      border: 2px solid black;
+      padding: 0 1rem 4.5rem 1rem;
+
+      /* border-bottom-left-radius: 40px; */
+      border-bottom-right-radius: 40px;
+      /* border-top-left-radius: 40px; */
+      border-top-right-radius: 40px;
+    }
     .inner {
       transition: all 0.3s ease-in-out;
       position: relative;
@@ -666,7 +738,7 @@
             top: 0%;
             left: 50%;
             display: grid;
-            grid: 50px 50px / repeat(5, 70px);
+            grid: 60px 60px / repeat(5, 80px);
 
             &:nth-child(2) {
               background: blue;
@@ -701,7 +773,7 @@
         }
         .buttons {
           display: flex;
-          margin-top: 1rem;
+          margin-top: 2.25rem;
           flex-direction: row-reverse;
           padding: 0 0.5rem;
           gap: 2rem;
@@ -721,7 +793,7 @@
           justify-content: space-between;
           align-items: center;
 
-          padding: 0rem 4rem;
+          padding: 0rem 1.5rem;
           .grids {
             position: relative;
             height: 100px;
@@ -734,7 +806,7 @@
               top: 50%;
               left: 50%;
               display: grid;
-              grid: 50px / repeat(2, 70px);
+              grid: 60px / repeat(2, 80px);
 
               &:nth-child(2) {
                 background: blue;

@@ -24,7 +24,6 @@ function Pokedex() {
           .versions["generation-v"];
 
       console.log(Object.keys(test)[0]);
-      // console.log(test[Object.keys(test)[0]]);
 
       return;
     },
@@ -37,7 +36,7 @@ function Pokedex() {
     }, 50);
   }
 
-  function getImageSrc(obj: any) {
+  function getImageSrc(obj: { [key: string]: any }) {
     const firstKey = Object.keys(obj)[0];
 
     return obj[firstKey].front_default;
@@ -63,6 +62,7 @@ function Pokedex() {
         console.log(rightInner.current);
         rightInner?.current?.classList.toggle("active");
       }
+
       if (event.key === "ArrowDown") {
         vertical?.classList.add("active_down");
         setTimeout(() => {
@@ -71,6 +71,7 @@ function Pokedex() {
       }
 
       if (event.key === "ArrowLeft") {
+        alert("");
         horizontal?.classList.add("active_left");
         setIndex((prev) => Math.max(prev - 1, 0));
         setTimeout(() => {
@@ -78,6 +79,7 @@ function Pokedex() {
         }, delay);
         highlight();
       }
+
       if (event.key === "ArrowRight") {
         horizontal?.classList.add("active_right");
         setIndex((prev) => Math.min(prev + 1, limit - 1));
@@ -176,10 +178,25 @@ function Pokedex() {
                 </div>
                 <div className="third">
                   <div className="cross" ref={cross}>
-                    <div className="hor" data-place={"left"}></div>
+                    <div className="hor" data-place={"left"}>
+                      <div
+                        className="btn_color"
+                        onClick={() => {
+                          const event = new KeyboardEvent("keydown", {
+                            key: "ArrowRight",
+                          });
+
+                          window.dispatchEvent(event);
+                        }}
+                      ></div>
+                      <div className="btn_color"></div>
+                    </div>
                     <div className="hor_side"></div>
                     <div className="center"></div>
-                    <div className="ver" data-place={"top"}></div>
+                    <div className="ver" data-place={"top"}>
+                      <div className="btn_color"></div>
+                      <div className="btn_color"></div>
+                    </div>
                     <div className="ver_side"></div>
                   </div>
                 </div>
@@ -202,207 +219,209 @@ function Pokedex() {
         <div className="right">
           <div className="inner" ref={rightInner}>
             <div className="top"></div>
-            <div className="middle">
-              <div className="screen">
-                <p>
-                  Height :
-                  <span>{data && data.pokemon_v2_pokemon[index].height}</span>
-                </p>
-                <p>
-                  {" "}
-                  Width :{" "}
-                  <span>{data && data.pokemon_v2_pokemon[index].weight}</span>
-                </p>
-                <p>
-                  Experience :{" "}
-                  <span>
-                    {data && data.pokemon_v2_pokemon[index].base_experience}
-                  </span>
-                </p>
-              </div>
-              <div className="grid_wrapper">
-                <div className="blue_grid">
-                  <div className="grid_item"></div>
-                  <div className="grid_item"></div>
-                  <div className="grid_item"></div>
-                  <div className="grid_item"></div>
-                  <div className="grid_item"></div>
-                  <div className="grid_item"></div>
-                  <div className="grid_item"></div>
-                  <div className="grid_item"></div>
-                  <div className="grid_item"></div>
-                  <div className="grid_item"></div>
+            <div className="wrap">
+              <div className="middle">
+                <div className="screen">
+                  <p>
+                    Height :
+                    <span>{data && data.pokemon_v2_pokemon[index].height}</span>
+                  </p>
+                  <p>
+                    {" "}
+                    Width :{" "}
+                    <span>{data && data.pokemon_v2_pokemon[index].weight}</span>
+                  </p>
+                  <p>
+                    Experience :{" "}
+                    <span>
+                      {data && data.pokemon_v2_pokemon[index].base_experience}
+                    </span>
+                  </p>
                 </div>
-                <div className="blue_grid">
-                  <div
-                    className="grid_item"
-                    style={{
-                      backgroundImage: `url(${
-                        data &&
-                        getImageSrc(
-                          data.pokemon_v2_pokemon[index]
-                            .pokemon_v2_pokemonsprites[0].sprites.versions[
-                            "generation-iii"
-                          ]
-                        )
-                      })`,
-                    }}
-                  ></div>
-                  <div
-                    className="grid_item"
-                    style={{
-                      backgroundImage: `url(${
-                        data &&
-                        getImageSrc(
-                          data.pokemon_v2_pokemon[index]
-                            .pokemon_v2_pokemonsprites[0].sprites.versions[
-                            "generation-iv"
-                          ]
-                        )
-                      })`,
-                    }}
-                  ></div>
-                  <div
-                    className="grid_item"
-                    style={{
-                      backgroundImage: `url(${
-                        data &&
-                        getImageSrc(
-                          data.pokemon_v2_pokemon[index]
-                            .pokemon_v2_pokemonsprites[0].sprites.versions[
-                            "generation-v"
-                          ]
-                        )
-                      })`,
-                    }}
-                  ></div>
-                  <div
-                    className="grid_item"
-                    style={{
-                      backgroundImage: `url(${
-                        data &&
-                        getImageSrc(
-                          data.pokemon_v2_pokemon[index]
-                            .pokemon_v2_pokemonsprites[0].sprites.versions[
-                            "generation-vi"
-                          ]
-                        )
-                      })`,
-                    }}
-                  ></div>
-                  <div
-                    className="grid_item"
-                    style={{
-                      backgroundImage: `url(${
-                        data &&
-                        getImageSrc(
-                          data.pokemon_v2_pokemon[index]
-                            .pokemon_v2_pokemonsprites[0].sprites.versions[
-                            "generation-vii"
-                          ]
-                        )
-                      })`,
-                    }}
-                  ></div>
-                  <div
-                    className="grid_item"
-                    style={{
-                      backgroundImage: `url(${
-                        data &&
-                        data.pokemon_v2_pokemon[index]
-                          .pokemon_v2_pokemonsprites[0].sprites.other
-                          .dream_world.front_default
-                      })`,
-                    }}
-                  ></div>
-                  <div
-                    className="grid_item"
-                    style={{
-                      backgroundImage: `url(${
-                        data &&
-                        data.pokemon_v2_pokemon[index]
-                          .pokemon_v2_pokemonsprites[0].sprites.other.home
-                          .front_default
-                      })`,
-                    }}
-                  ></div>
-                  <div
-                    className="grid_item"
-                    style={{
-                      backgroundImage: `url(${
-                        data &&
-                        data.pokemon_v2_pokemon[index]
-                          .pokemon_v2_pokemonsprites[0].sprites.other[
-                          "official-artwork"
-                        ].front_default
-                      })`,
-                    }}
-                  ></div>
-                  <div className="grid_item"></div>
-                  <div className="grid_item"></div>
-                </div>
-              </div>
-              <div className="buttons">
-                <SlimBtn />
-                <SlimBtn />
-              </div>
-              <div className="white_wrap">
-                <div className="grids">
-                  <div className="white_cell">
-                    <div
-                      className="item"
-                      style={{
-                        backgroundImage: `url(${
-                          data &&
-                          data.pokemon_v2_pokemon[index]
-                            .pokemon_v2_pokemonsprites[0].sprites.front_default
-                        })`,
-                      }}
-                    ></div>
-                    <div
-                      className="item"
-                      style={{
-                        backgroundImage: `url(${
-                          data &&
-                          data.pokemon_v2_pokemon[index]
-                            .pokemon_v2_pokemonsprites[0].sprites.front_shiny
-                        })`,
-                      }}
-                    ></div>
+                <div className="grid_wrapper">
+                  <div className="blue_grid">
+                    <div className="grid_item"></div>
+                    <div className="grid_item"></div>
+                    <div className="grid_item"></div>
+                    <div className="grid_item"></div>
+                    <div className="grid_item"></div>
+                    <div className="grid_item"></div>
+                    <div className="grid_item"></div>
+                    <div className="grid_item"></div>
+                    <div className="grid_item"></div>
+                    <div className="grid_item"></div>
                   </div>
-                  <div className="white_cell">
+                  <div className="blue_grid">
                     <div
-                      className="item"
+                      className="grid_item"
                       style={{
                         backgroundImage: `url(${
                           data &&
-                          data.pokemon_v2_pokemon[index]
-                            .pokemon_v2_pokemonsprites[0].sprites.back_default
+                          getImageSrc(
+                            data.pokemon_v2_pokemon[index]
+                              .pokemon_v2_pokemonsprites[0].sprites.versions[
+                              "generation-iii"
+                            ]
+                          )
                         })`,
                       }}
                     ></div>
                     <div
-                      className="item"
+                      className="grid_item"
+                      style={{
+                        backgroundImage: `url(${
+                          data &&
+                          getImageSrc(
+                            data.pokemon_v2_pokemon[index]
+                              .pokemon_v2_pokemonsprites[0].sprites.versions[
+                              "generation-iv"
+                            ]
+                          )
+                        })`,
+                      }}
+                    ></div>
+                    <div
+                      className="grid_item"
+                      style={{
+                        backgroundImage: `url(${
+                          data &&
+                          getImageSrc(
+                            data.pokemon_v2_pokemon[index]
+                              .pokemon_v2_pokemonsprites[0].sprites.versions[
+                              "generation-v"
+                            ]
+                          )
+                        })`,
+                      }}
+                    ></div>
+                    <div
+                      className="grid_item"
+                      style={{
+                        backgroundImage: `url(${
+                          data &&
+                          getImageSrc(
+                            data.pokemon_v2_pokemon[index]
+                              .pokemon_v2_pokemonsprites[0].sprites.versions[
+                              "generation-vi"
+                            ]
+                          )
+                        })`,
+                      }}
+                    ></div>
+                    <div
+                      className="grid_item"
+                      style={{
+                        backgroundImage: `url(${
+                          data &&
+                          getImageSrc(
+                            data.pokemon_v2_pokemon[index]
+                              .pokemon_v2_pokemonsprites[0].sprites.versions[
+                              "generation-vii"
+                            ]
+                          )
+                        })`,
+                      }}
+                    ></div>
+                    <div
+                      className="grid_item"
                       style={{
                         backgroundImage: `url(${
                           data &&
                           data.pokemon_v2_pokemon[index]
-                            .pokemon_v2_pokemonsprites[0].sprites.back_shiny
+                            .pokemon_v2_pokemonsprites[0].sprites.other
+                            .dream_world.front_default
                         })`,
                       }}
                     ></div>
+                    <div
+                      className="grid_item"
+                      style={{
+                        backgroundImage: `url(${
+                          data &&
+                          data.pokemon_v2_pokemon[index]
+                            .pokemon_v2_pokemonsprites[0].sprites.other.home
+                            .front_default
+                        })`,
+                      }}
+                    ></div>
+                    <div
+                      className="grid_item"
+                      style={{
+                        backgroundImage: `url(${
+                          data &&
+                          data.pokemon_v2_pokemon[index]
+                            .pokemon_v2_pokemonsprites[0].sprites.other[
+                            "official-artwork"
+                          ].front_default
+                        })`,
+                      }}
+                    ></div>
+                    <div className="grid_item"></div>
+                    <div className="grid_item"></div>
                   </div>
                 </div>
-
-                <div className="led">
-                  <div className="a-color"></div>
-                  <div className="b-color"></div>
+                <div className="buttons">
+                  <SlimBtn />
+                  <SlimBtn />
+                </div>
+                <div className="white_wrap">
+                  <div className="grids">
+                    <div className="white_cell">
+                      <div
+                        className="item"
+                        style={{
+                          backgroundImage: `url(${
+                            data &&
+                            data.pokemon_v2_pokemon[index]
+                              .pokemon_v2_pokemonsprites[0].sprites
+                              .front_default
+                          })`,
+                        }}
+                      ></div>
+                      <div
+                        className="item"
+                        style={{
+                          backgroundImage: `url(${
+                            data &&
+                            data.pokemon_v2_pokemon[index]
+                              .pokemon_v2_pokemonsprites[0].sprites.front_shiny
+                          })`,
+                        }}
+                      ></div>
+                    </div>
+                    <div className="white_cell">
+                      <div
+                        className="item"
+                        style={{
+                          backgroundImage: `url(${
+                            data &&
+                            data.pokemon_v2_pokemon[index]
+                              .pokemon_v2_pokemonsprites[0].sprites.back_default
+                          })`,
+                        }}
+                      ></div>
+                      <div
+                        className="item"
+                        style={{
+                          backgroundImage: `url(${
+                            data &&
+                            data.pokemon_v2_pokemon[index]
+                              .pokemon_v2_pokemonsprites[0].sprites.back_shiny
+                          })`,
+                        }}
+                      ></div>
+                    </div>
+                  </div>
+                  <div className="led">
+                    <div className="a-color"></div>
+                    <div className="b-color"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="bottom">
-              <div className=""></div>
-              <div className=""></div>
+              <div className="bottom">
+                <div className=""></div>
+                <div className=""></div>
+              </div>
             </div>
           </div>
         </div>
